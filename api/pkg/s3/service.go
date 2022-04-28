@@ -155,11 +155,11 @@ func (s *APIService) isBackendExist(ctx context.Context, backendName string) boo
 func HandleS3Error(response *restful.Response, request *restful.Request, err error, errCode int32) error {
 	if err != nil {
 		isStatus409, er := regexp.Match("status\\scode:\\s409", []byte(err.Error()))
-                if er == nil {
-                        if isStatus409 {
-				err =  s3error.ErrBucketAlreadyExists
-                        }
-                }
+		if er == nil {
+			if isStatus409 {
+				err = s3error.ErrBucketAlreadyExists
+			}
+		}
 		WriteErrorResponse(response, request, err)
 		return err
 	}
